@@ -35,7 +35,14 @@
 
 ## 下载与安装
 
-GitHub Actions 的 **Build mobile apps** 工作流会生成两个可安装的 Android 测试包：`standard` 和 `huawei`。在工作流页面打开最近一次成功运行，下载对应的 Artifacts 并解压取得 APK。华为版不依赖 Google 服务；两版使用不同的应用 ID，数据互不共享。
+从 [v1.0.0 下载页](https://github.com/skissnsbsjzjz6331/suixinji/releases/tag/v1.0.0) 取得 Android 测试安装包：
+
+| 版本 | 下载 | 适用设备 |
+| --- | --- | --- |
+| 标准版 | [suixinji-standard-v1.0.0.apk](https://github.com/skissnsbsjzjz6331/suixinji/releases/download/v1.0.0/suixinji-standard-v1.0.0.apk) | 常规 Android 7+ 设备 |
+| 华为版 | [suixinji-huawei-v1.0.0.apk](https://github.com/skissnsbsjzjz6331/suixinji/releases/download/v1.0.0/suixinji-huawei-v1.0.0.apk) | 华为及鸿蒙兼容设备，不依赖 Google 服务 |
+
+两款 APK 是 Debug 签名的测试安装包，可用于个人手机试用。它们使用不同的应用 ID，数据互不共享。GitHub Actions 还保留了构建记录与临时产物。
 
 iOS 工程位于 [`ios/`](ios/)。工作流会检查 iOS 模拟器构建；**iPhone 真机安装需要在 macOS/Xcode 中使用自己的 Apple 开发者签名**，仓库不包含可直接安装的签名 IPA。详细步骤见 [构建说明](docs/BUILD.md)。
 
@@ -62,3 +69,4 @@ Web 预览保留了 iPhone/Android 设备框；安装到手机后会自动使用
 ## 版本
 
 当前版本 **1.0.0**。更新记录见 [CHANGELOG.md](CHANGELOG.md)。
+
