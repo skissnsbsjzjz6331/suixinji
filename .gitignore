@@ -1,0 +1,17 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+*.log
+preview-*.png
+android/.gradle/
+android/local.properties
+android/**/build/
+ios/DerivedData/
+ios/App/Pods/
+ios/App/App.xcworkspace/xcuserdata/
+*.keystore
+*.jks
+*.ipa
+*.apk
+.toolchain/

@@ -1,0 +1,64 @@
+.native-app,
+.native-app body,
+.native-app #root {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.native-app .native-device-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  border-radius: 0;
+  box-shadow: none;
+  cursor: auto;
+  user-select: auto;
+  --device-safe-area-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.native-app .native-device-screen,
+.native-app .native-device-screen * {
+  cursor: auto !important;
+}
+
+.native-app .native-device-screen button,
+.native-app .native-device-screen a {
+  cursor: pointer !important;
+}
+
+.native-app .mobile-app-viewport[data-platform="android"] {
+  bottom: 0 !important;
+}
+
+.native-app .mobile-page {
+  --mobile-safe-area-height: env(safe-area-inset-bottom, 0px);
+}
+
+.native-app .mobile-scroll {
+  touch-action: pan-y;
+}
+
+.native-app .content {
+  padding-top: calc(22px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px));
+}
+
+.native-app .ledger .nav {
+  bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.native-app .ledger .toast {
+  bottom: calc(85px + env(safe-area-inset-bottom, 0px));
+}
+
+.native-app .bottom-sheet {
+  bottom: env(safe-area-inset-bottom, 0px) !important;
+  max-height: 78dvh !important;
+}
+
+.native-app .form {
+  max-height: 65dvh;
+}
