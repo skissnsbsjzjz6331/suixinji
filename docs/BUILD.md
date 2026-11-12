@@ -5,7 +5,7 @@
 | 平台 | 需要的工具 |
 | --- | --- |
 | Web | Node.js 22+ |
-| Android / 华为 | Node.js 22+、JDK 17+、Android SDK API 36、Android Build Tools、Gradle Wrapper |
+| Android / 华为 | Node.js 22+、JDK 21+、Android SDK API 36、Android Build Tools、Gradle Wrapper |
 | iOS | macOS、Xcode 26+、Node.js 22+；真机还需 Apple 开发者签名 |
 
 原生项目使用 [Capacitor 8](https://capacitorjs.com/docs/getting-started)。Android 最低 API 24（Android 7）；iOS 最低版本 15。
@@ -62,3 +62,4 @@ npm run test:sites
 ```
 
 仓库中的 `scripts/verify-ledger.mjs` 使用全新的非持久化浏览器会话测试账单操作，不读取日常浏览器数据。运行前需要本地预览服务及 Chrome。
+
