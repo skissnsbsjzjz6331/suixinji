@@ -7,6 +7,7 @@ import {
   type PropsWithChildren,
 } from "react";
 import { useKeyboardInsets } from "./Keyboard";
+import { Capacitor } from "@capacitor/core";
 
 type MobileScrollProps = PropsWithChildren<{
   className?: string;
@@ -47,6 +48,7 @@ type DragSession = {
 };
 
 export function MobileScroll({ className, children }: MobileScrollProps) {
+  const nativeScroll = Capacitor.isNativePlatform();
   const { isKeyboardVisible, keyboardHeight, keyboardDragging } = useKeyboardInsets();
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const hideTimerRef = useRef<number | null>(null);
@@ -433,10 +435,10 @@ export function MobileScroll({ className, children }: MobileScrollProps) {
         data-testid="mobile-scroll"
         data-dragging={isDragging ? "true" : "false"}
         data-overscroll={overscrollY.toFixed(2)}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
+        onPointerDown={nativeScroll ? undefined : handlePointerDown}
+        onPointerMove={nativeScroll ? undefined : handlePointerMove}
+        onPointerUp={nativeScroll ? undefined : endDrag}
+        onPointerCancel={nativeScroll ? undefined : endDrag}
         onClickCapture={suppressClickAfterDrag}
       >
         <div

@@ -39,6 +39,8 @@
 
 .native-app .mobile-scroll {
   touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
 }
 
 .native-app .content {
