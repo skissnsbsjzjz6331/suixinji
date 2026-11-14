@@ -1,0 +1,218 @@
+.ledger .nav.liquid-dock {
+  --dock-tint: color-mix(in srgb, var(--card) 25%, transparent);
+  touch-action: none;
+  user-select: none;
+  background: transparent;
+  border-color: rgb(255 255 255 / .72);
+  box-shadow: 0 8px 26px rgb(27 45 32 / .12), inset 0 1px rgb(255 255 255 / .52);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.ledger .nav.liquid-dock::before {
+  inset: 0;
+  background: var(--dock-tint);
+  -webkit-backdrop-filter: blur(7px) saturate(150%);
+  backdrop-filter: blur(7px) saturate(150%);
+}
+
+.ledger .liquid-dock .dock-filter {
+  position: absolute;
+  pointer-events: none;
+}
+
+.ledger .liquid-dock .nav-glider {
+  z-index: 3;
+  left: 3px;
+  top: 4px;
+  width: calc((100% - 8px) / 5 + 2px);
+  height: calc(100% - 8px);
+  opacity: 0;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / .63);
+  background: linear-gradient(153deg, rgb(255 255 255 / .31), transparent 39% 68%, rgb(255 255 255 / .18));
+  box-shadow: 0 4px 12px rgb(36 65 45 / .14), inset 0 1px 2px rgb(255 255 255 / .88), inset 0 -2px 5px rgb(84 122 96 / .24);
+  -webkit-backdrop-filter: saturate(155%) contrast(1.06);
+  backdrop-filter: var(--lens-filter, saturate(155%) contrast(1.06));
+  transition: none;
+  pointer-events: none;
+  will-change: transform;
+  overflow: hidden;
+}
+
+.ledger .liquid-dock .nav-glider::after {
+  content: "";
+  position: absolute;
+  inset: 2px 4px auto;
+  height: 43%;
+  border-radius: 999px;
+  background: radial-gradient(ellipse at 42% 0%, rgb(255 255 255 / .42), transparent 72%);
+}
+
+.ledger .nav button:not(.add) {
+  color: color-mix(in srgb, var(--text) 80%, var(--muted));
+  text-shadow: 0 0 3px var(--card), 0 0 8px var(--card);
+  transition: color .25s ease, transform .3s cubic-bezier(.2, .7, .2, 1);
+}
+.ledger .nav button { touch-action: none; }
+.ledger .nav button.selected:not(.add) { color: var(--accent); transform: translateY(-1px); }
+.ledger .nav button.add {
+  background: color-mix(in srgb, var(--accent) 86%, transparent);
+  color: var(--accent-ink);
+  border-color: rgba(255, 255, 255, .38);
+  border-radius: 18px;
+  box-shadow: 0 8px 18px rgba(25, 58, 36, .24), inset 0 1px rgba(255, 255, 255, .45), inset 0 -2px 4px rgba(8, 40, 23, .1);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+}
+.ledger .nav button.add:active { transform: translateY(-1px) scale(.95); }
+.ledger.dark .nav.liquid-dock {
+  --dock-tint: color-mix(in srgb, var(--card) 32%, transparent);
+  border-color: rgb(223 245 229 / .27);
+  box-shadow: 0 8px 26px rgb(0 0 0 / .32), inset 0 1px rgb(255 255 255 / .14);
+}
+.ledger.dark .liquid-dock .nav-glider {
+  background: linear-gradient(150deg, rgb(206 246 217 / .18), transparent 48% 68%, rgb(206 246 217 / .1));
+  border-color: rgb(213 242 219 / .4);
+  box-shadow: 0 4px 14px rgb(0 0 0 / .23), inset 0 1px 2px rgb(255 255 255 / .3), inset 0 -2px 5px rgb(170 226 186 / .18);
+}
+
+
+/* Sheets render through a portal, so they receive the same glass tokens directly. */
+:is(.ledger, .glass-sheet-controls) {
+  --button-glass-tint: color-mix(in srgb, var(--accent) 7%, var(--card));
+  --button-glass-rim: color-mix(in srgb, var(--accent) 19%, var(--line));
+  --button-glass-shine: rgb(255 255 255 / .57);
+  --button-glass-shadow: rgb(31 51 36 / .09);
+}
+
+:is(.ledger, .glass-sheet-controls).dark {
+  --button-glass-tint: color-mix(in srgb, var(--accent) 11%, var(--card));
+  --button-glass-shine: rgb(237 255 242 / .13);
+  --button-glass-shadow: rgb(0 0 0 / .2);
+}
+
+.calendar-sheet.glass-sheet-controls {
+  --card: #fff;
+  --text: var(--picker-text);
+  --line: var(--picker-line);
+}
+
+.calendar-sheet.glass-sheet-controls.dark { --card: #222a25; }
+
+.bottom-sheet:has(.glass-sheet-controls.dark) {
+  color: #edf2ed;
+  background: #222a25;
+}
+
+.bottom-sheet:has(.glass-sheet-controls.dark) .sheet-title { color: inherit; }
+
+.ledger :is(.back-button, .home-period > button, .period-picker > button, .category-filters > button, .day-filter > button, .line-action, .upload, .theme-options > button, .custom-theme > button),
+.glass-sheet-controls :is(.calendar-year-head > button, .calendar-grid > button) {
+  border: 1px solid var(--button-glass-rim);
+  background: linear-gradient(160deg, var(--button-glass-shine), transparent 64%),
+    color-mix(in srgb, var(--button-glass-tint) 47%, transparent);
+  color: var(--text);
+  box-shadow: inset 0 1px 0 var(--button-glass-shine), 0 2px 6px var(--button-glass-shadow);
+  -webkit-backdrop-filter: blur(7px) saturate(145%);
+  backdrop-filter: blur(7px) saturate(145%);
+}
+
+.ledger :is(.tabs, .period-tabs, .stat-switch),
+.glass-sheet-controls .type-tabs {
+  background: color-mix(in srgb, var(--button-glass-tint) 50%, transparent);
+  border: 1px solid var(--button-glass-rim);
+  box-shadow: inset 0 1px 0 var(--button-glass-shine);
+}
+
+.ledger :is(.tabs, .period-tabs, .stat-switch) > button,
+.glass-sheet-controls .type-tabs > button { color: var(--text); }
+
+.ledger :is(.tabs, .period-tabs, .stat-switch, .category-filters, .theme-options, .custom-theme) > button.active,
+.glass-sheet-controls :is(.type-tabs, .calendar-grid) > button.active {
+  color: var(--text);
+  background: linear-gradient(155deg, var(--button-glass-shine), transparent 72%),
+    color-mix(in srgb, var(--accent) 18%, var(--card));
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--button-glass-rim), inset 0 1px var(--button-glass-shine), 0 2px 6px var(--button-glass-shadow);
+}
+
+:is(.ledger, .glass-sheet-controls) .primary {
+  color: var(--text);
+  background: linear-gradient(155deg, var(--button-glass-shine), transparent 72%),
+    color-mix(in srgb, var(--accent) 23%, var(--card));
+  border: 1px solid var(--button-glass-rim);
+  box-shadow: inset 0 1px var(--button-glass-shine), 0 4px 12px var(--button-glass-shadow);
+  -webkit-backdrop-filter: blur(9px) saturate(145%);
+  backdrop-filter: blur(9px) saturate(145%);
+}
+
+.ledger :is(.account-top > button, .entry-delete, .review > button),
+.glass-sheet-controls .delete {
+  border: 1px solid transparent;
+  border-radius: 999px;
+}
+
+.ledger :is(.entry-delete, .review > button):active,
+.glass-sheet-controls .delete:active {
+  background: color-mix(in srgb, var(--button-glass-tint) 65%, transparent);
+}
+
+.ledger .account-top > button {
+  padding: 7px 9px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--button-glass-tint) 58%, transparent);
+  border-color: var(--button-glass-rim);
+}
+
+.ledger button:not(.liquid-dock button, .entry-open),
+.ledger .liquid-dock button.add,
+.glass-sheet-controls button {
+  scale: 1;
+  transition: scale 250ms cubic-bezier(.2, 1.65, .45, 1), filter 140ms ease-out;
+}
+
+.ledger button:not(.liquid-dock button, .entry-open):enabled:active,
+.ledger .liquid-dock button.add:enabled:active,
+.glass-sheet-controls button:enabled:active {
+  scale: .94 .9;
+  filter: brightness(1.045) saturate(1.14);
+  transition: scale 85ms ease-out, filter 85ms ease-out;
+}
+
+.ledger .liquid-dock button.add:active { transform: translateY(-3px); }
+
+.update-versions { margin: 4px 0 16px; color: var(--muted); font-size: 12px; }
+.update-prompt h2 { margin: 0 0 8px; font-size: 15px; }
+.update-notes {
+  max-height: 32vh;
+  overflow: auto;
+  touch-action: pan-y;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.update-actions { display: flex; gap: 10px; }
+.update-actions button {
+  flex: 1;
+  display: block;
+  margin: 8px 0 0;
+  padding: 12px 6px;
+  text-align: center;
+}
+
+:is(.ledger, .glass-sheet-controls) button:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ledger button:not(.liquid-dock button, .entry-open),
+  .ledger .liquid-dock button.add,
+  .ledger .nav button:not(.add),
+  .glass-sheet-controls button {
+    scale: none !important;
+    transition: none !important;
+  }
+}

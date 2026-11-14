@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+def signingPath = providers.environmentVariable('SUIXINJI_KEYSTORE').orNull
+
 android {
     namespace = "app.suixinji.ledger"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -7,8 +9,8 @@ android {
         applicationId "app.suixinji.ledger"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10001
-        versionName "1.0.1"
+        versionCode 10002
+        versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -26,8 +28,19 @@ android {
             applicationIdSuffix ".huawei"
         }
     }
+    signingConfigs {
+        if (signingPath) {
+            distribution {
+                storeFile file(signingPath)
+                storePassword providers.environmentVariable('SUIXINJI_STORE_PASSWORD').get()
+                keyAlias providers.environmentVariable('SUIXINJI_KEY_ALIAS').get()
+                keyPassword providers.environmentVariable('SUIXINJI_KEY_PASSWORD').get()
+            }
+        }
+    }
     buildTypes {
         release {
+            if (signingPath) signingConfig signingConfigs.distribution
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -45,6 +45,10 @@ cd android
 
 这两个 Debug APK 已由 Android 工具自动签名，可用于个人手机安装与测试；它们**不是应用商店正式发布包**。正式上架需由发布者保管签名密钥并构建 Release APK/AAB。两个应用 ID 的本地数据隔离，切换版本前请先导出账本。
 
+### 发布 GitHub 安装包
+
+从 1.0.2 起，GitHub 下载页上的标准版和华为版须使用 1.0.2 的同一把发布密钥。由本地安全存储注入环境变量 `SUIXINJI_KEYSTORE`、`SUIXINJI_STORE_PASSWORD`、`SUIXINJI_KEY_ALIAS`、`SUIXINJI_KEY_PASSWORD`，同步 Web 代码后执行 `assembleStandardRelease assembleHuaweiRelease`。把两种 APK 的包名、版本号及证书指纹与对应旧版核对后再上传。单独备份密钥和密码，保留原签名才能持续覆盖升级。Actions 的 Debug APK 用于构建验证。
+
 ## iOS
 
 在 macOS 上执行 `npx cap sync ios`，用 Xcode 打开 `ios/App/App.xcodeproj`，选择自己的开发团队与设备后构建。无 Apple 签名时可以编译模拟器版本，但无法生成可安装到普通 iPhone 的 IPA。不要把证书、描述文件或私钥提交到仓库。
