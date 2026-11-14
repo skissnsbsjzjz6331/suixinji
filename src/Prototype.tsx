@@ -192,7 +192,9 @@ export default function Prototype(){
           {accounts.slice(0,3).map((account,index)=>{
             const amount=monthly.filter(e=>e.account===account).reduce((sum,e)=>sum+(e.kind==='income'?e.amount:e.kind==='expense'?-e.amount:0),0);
             return <li className="account-row" key={account}>
-              <span className="account-icon material-symbols-outlined" aria-hidden="true">{['wallet','credit_card','payments'][index]}</span>
+              <span className="account-icon" aria-hidden="true">
+                <span className="material-symbols-outlined">{['wallet','credit_card','payments'][index]}</span>
+              </span>
               <b>{account}</b><strong>{amount<0?'−':'+'}{money(amount)}</strong>
             </li>;
           })}

@@ -7,7 +7,7 @@
 
   一款无需登录、离线可用的个人记账 App。账单留在自己的设备上，由自己决定何时导出。
 
-  ![Version](https://img.shields.io/badge/version-1.0.2-365C49?style=flat-square)
+  ![Version](https://img.shields.io/badge/version-1.0.3-365C49?style=flat-square)
   ![Android](https://img.shields.io/badge/Android-7%2B-365C49?style=flat-square)
   ![iOS](https://img.shields.io/badge/iOS-15%2B-365C49?style=flat-square)
   ![Local](https://img.shields.io/badge/data-local%20only-365C49?style=flat-square)
@@ -35,14 +35,14 @@
 
 ## 下载与安装
 
-从 [v1.0.2 下载页](https://github.com/skissnsbsjzjz6331/suixinji/releases/tag/v1.0.2) 取得 Android 安装包：
+从 [v1.0.3 下载页](https://github.com/skissnsbsjzjz6331/suixinji/releases/tag/v1.0.3) 取得 Android 安装包：
 
 | 版本 | 下载 | 适用设备 |
 | --- | --- | --- |
-| 标准版 | [suixinji-standard-v1.0.2.apk](https://github.com/skissnsbsjzjz6331/suixinji/releases/download/v1.0.2/suixinji-standard-v1.0.2.apk) | 常规 Android 7+ 设备 |
-| 华为版 | [suixinji-huawei-v1.0.2.apk](https://github.com/skissnsbsjzjz6331/suixinji/releases/download/v1.0.2/suixinji-huawei-v1.0.2.apk) | 华为及鸿蒙兼容设备，不依赖 Google 服务 |
+| 标准版 | [suixinji-standard-v1.0.3.apk](https://github.com/skissnsbsjzjz6331/suixinji/releases/download/v1.0.3/suixinji-standard-v1.0.3.apk) | 常规 Android 7+ 设备 |
+| 华为版 | [suixinji-huawei-v1.0.3.apk](https://github.com/skissnsbsjzjz6331/suixinji/releases/download/v1.0.3/suixinji-huawei-v1.0.3.apk) | 华为及鸿蒙兼容设备，不依赖 Google 服务 |
 
-标准版和华为版使用不同的应用 ID，请按原渠道下载。从 1.0.0 或 1.0.1 升级时，请先用「我的 → 导出账本」把 CSV 保存到应用外并确认可打开，再卸载旧版、安装 1.0.2，并在「导入」恢复账单。预算和主题需重新设置。从 1.0.2 起，后续同渠道发布包使用固定签名，可覆盖安装并保留本地账本。
+标准版和华为版使用不同的应用 ID，请按原渠道下载。从 1.0.0 或 1.0.1 升级时，请先用「我的 → 导出账本」把 CSV 保存到应用外并确认可打开，再卸载旧版、安装 1.0.3，并在「导入」恢复账单。预算和主题需重新设置。从 1.0.2 起，后续同渠道发布包使用固定签名，可覆盖安装并保留本地账本。
 
 应用启动时会向 GitHub 检查新版本。更新提示可关闭，也可在「我的 → 检查更新」手动查询。
 
@@ -70,5 +70,5 @@ Web 预览保留了 iPhone/Android 设备框；安装到手机后会自动使用
 
 ## 版本
 
-当前版本 **1.0.2**。更新记录见 [CHANGELOG.md](CHANGELOG.md)。
+当前版本 **1.0.3**。更新记录见 [CHANGELOG.md](CHANGELOG.md)。
 

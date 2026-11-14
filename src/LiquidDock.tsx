@@ -3,6 +3,9 @@ import { createDockRefractionMap } from './dockRefraction';
 
 type Page = '明细' | '统计' | '导入' | '我的';
 type TapSlide = { from: number; startedAt: number; duration: number; presence: number };
+const tapRevealMs = 48;
+const tapHoldMs = 42;
+const tapFadeMs = 130;
 const destinations: { label: Page | '＋'; icon: string }[] = [
   { label: '明细', icon: 'receipt_long' },
   { label: '统计', icon: 'bar_chart' },
@@ -56,13 +59,13 @@ export function LiquidDock({ page, onSelect, onAdd }: { page: Page; onSelect: (p
       const tapSlide = motion.tapSlide;
       if (tapSlide) {
         const elapsed = Math.max(0, now - tapSlide.startedAt);
-        const progress = Math.min(1, elapsed / tapSlide.duration);
-        // Ease out into the target, then let the lens contract and fade in place.
-        motion.position = tapSlide.from + (motion.target - tapSlide.from) * (1 - (1 - progress) ** 2.4);
-        const fade = Math.max(0, Math.min(1, (elapsed - tapSlide.duration) / 90));
-        const appearance = Math.min(1, elapsed / 32);
+        const progress = Math.max(0, Math.min(1, (elapsed - tapRevealMs) / tapSlide.duration));
+        const glide = progress * progress * (3 - 2 * progress);
+        motion.position = tapSlide.from + (motion.target - tapSlide.from) * glide;
+        const fade = Math.max(0, Math.min(1, (elapsed - tapRevealMs - tapSlide.duration - tapHoldMs) / tapFadeMs));
+        const appearance = Math.min(1, elapsed / tapRevealMs);
         motion.presence = (tapSlide.presence + (1 - tapSlide.presence) * appearance) * (1 - fade ** 1.3);
-        motion.shape = .2 * Math.sin(progress * Math.PI) - .1 * Math.sin(fade * Math.PI);
+        motion.shape = .13 * Math.sin(progress * Math.PI) - .065 * Math.sin(fade * Math.PI);
         if (fade === 1) motion.tapSlide = null;
       } else if (dragging) {
         const previous = motion.position;
@@ -90,11 +93,12 @@ export function LiquidDock({ page, onSelect, onAdd }: { page: Page; onSelect: (p
 
       const pitch = (bar.clientWidth - 8) / 5;
       const travel = pitch * motion.position;
-      const size = .69 + motion.presence * .31;
+      const size = .88 + motion.presence * .12;
       const shape = motion.shape * motion.presence;
-      const lift = reducedMotion.matches ? 0 : motion.presence * 4;
-      lens.style.transform = `translate3d(${travel}px,${-lift}px,0) scale(${size + shape},${size - shape * .64})`;
-      lens.style.opacity = String(motion.presence > .015 ? motion.presence : 0);
+      lens.style.transform = `translate3d(${travel}px,0,0) scale(${size + shape},${size - shape * .64})`;
+      const opacity = String(motion.presence > .015 ? motion.presence : 0);
+      lens.style.opacity = opacity;
+      bar.style.setProperty('--dock-glass-presence', opacity);
       if (dragging || (!reducedMotion.matches && (motion.tapSlide || releaseAge < .36 || motion.presence > .015))) {
         motion.frame = requestAnimationFrame(tick);
       } else {
@@ -121,7 +125,7 @@ export function LiquidDock({ page, onSelect, onAdd }: { page: Page; onSelect: (p
     motion.tapSlide = {
       from: motion.position,
       startedAt: performance.now(),
-      duration: Math.min(185, 115 + Math.abs(motion.target - motion.position) * 17),
+      duration: Math.min(390, 275 + Math.abs(motion.target - motion.position) * 28),
       presence: motion.presence,
     };
     startRef.current();
@@ -191,7 +195,7 @@ export function LiquidDock({ page, onSelect, onAdd }: { page: Page; onSelect: (p
     <svg className="dock-filter" width="0" height="0" aria-hidden="true">
       <filter id={filterId} x="0" y="0" width="100%" height="100%" primitiveUnits="objectBoundingBox" colorInterpolationFilters="sRGB">
         <feImage ref={mapRef} x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" />
-        <feDisplacementMap in="SourceGraphic" in2="map" scale=".42" xChannelSelector="R" yChannelSelector="G" />
+        <feDisplacementMap in="SourceGraphic" in2="map" scale=".24" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </svg>
     <span ref={lensRef} className="nav-glider" aria-hidden="true" />
